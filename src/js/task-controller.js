@@ -1,5 +1,4 @@
-import openImage from "../assets/open-90.png";
-import { addMenuItemsAnimations } from "./menu-animations.js";
+import Task from "./task.js";
 
 export default (function TaskController() {
   let tasks = [];
@@ -22,83 +21,19 @@ export default (function TaskController() {
     });
   };
 
-  // DOM manipulation
-  function updateTaskLengthHeader() {
-    // Task Header
-    const totalTaskHeader = document.getElementById("total-task-header");
-    totalTaskHeader.textContent = getTaskAmount();
-
-    // Task List
-    const taskList = document.querySelector(".task-view");
-    taskList.innerHTML = "";
-    tasks.forEach((task) => {
-      const taskItem = createTaskItem(task);
-      taskList.appendChild(taskItem);
-    });
-  }
-
-  function createTaskItem(task) {
-    // Initial Element
-    const taskItem = document.createElement("div");
-    taskItem.classList.add("task-item");
-
-    // Task checkbox and label container
-    const taskCheckboxContainer = document.createElement("div");
-    taskCheckboxContainer.classList.add("task-checkbox-container");
-
-    // Task Checkbox
-    const taskCheckbox = document.createElement("input");
-    taskCheckbox.type = "checkbox";
-    taskCheckboxContainer.appendChild(taskCheckbox);
-
-    // Task Name
-    const taskName = document.createElement("h4");
-    taskName.textContent = task.taskName;
-    taskCheckboxContainer.appendChild(taskName);
-
-    // append task checkbox container to task item
-    taskItem.appendChild(taskCheckboxContainer);
-
-    // Task Open Icon
-    const taskOpenIcon = document.createElement("img");
-    taskOpenIcon.src = openImage;
-    taskItem.appendChild(taskOpenIcon);
-
-    return taskItem;
-  }
-
-  function createCategoryContainers() {
-    const categoryContainer = document.querySelector(
-      "#category-list-container"
-    );
-    categoryContainer.innerHTML = "";
-    let categories = [];
-
-    tasks.forEach((task) => {
-      if (!categories.includes(task.category)) {
-        categories.push(task.category);
-      }
-    });
-
-    // Create categories
-    categories.forEach((category) => {
-      const categoryElement = document.createElement("div");
-      categoryElement.classList.add(
-        "option-item",
-        "clickable-menu-item",
-        "category-item"
+  // Examples
+  function addRandomTasks(numTasks = 3) {
+    for (let i = 1; i <= numTasks; i++) {
+      addTask(
+        new Task(
+          `Task ${i}`,
+          `Description ${i}`,
+          "General",
+          new Date(2024, 2, 15),
+          1
+        )
       );
-      categoryElement.textContent = category;
-
-      categoryContainer.appendChild(categoryElement);
-    });
-
-    console.log(categories);
-  }
-
-  function updateDOM() {
-    updateTaskLengthHeader();
-    createCategoryContainers();
+    }
   }
 
   // Export
@@ -111,6 +46,6 @@ export default (function TaskController() {
     removeTask,
     clearAllTasks,
     clearTaskOfCategory,
-    updateDOM,
+    addRandomTasks,
   };
 })();

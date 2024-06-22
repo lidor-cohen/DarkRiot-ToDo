@@ -6,8 +6,8 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: "DarkRiot TODO",
-      template: path.resolve(__dirname, "src/template.html"),
+      title: "DarkRiot TODO - Homepage",
+      template: path.resolve(__dirname, "src/index.html"),
     }),
   ],
 

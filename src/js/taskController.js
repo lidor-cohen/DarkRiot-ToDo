@@ -1,35 +1,33 @@
 export default (function TaskController() {
   let tasks = [];
 
-  let addTask = (task) => {
-    tasks.push(task);
-  };
+  // Getters
+  let getTasks = () => tasks;
+  let getTaskAmount = () => tasks.length;
+  let getTask = (index) => tasks[index];
 
-  let removeTask = (index) => {
-    tasks.splice(index, 1);
-  };
-
-  let getTasks = () => {
-    return tasks;
-  };
-
-  let getTask = (index) => {
-    return tasks[index];
-  };
-
-  let setTask = (index, task) => {
-    tasks[index] = task;
-  };
-
+  // Setters
+  let addTask = (task) => tasks.push(task);
+  let setTask = (index, task) => (tasks[index] = task);
+  let removeTask = (index) => tasks.splice(index, 1);
+  let clearAllTasks = () => (tasks = []);
   let clearTaskOfCategory = (category) => {
     tasks.forEach((task, index) => {
-      if (task.category === category) {
+      if (task.category.toLowerCase() === category.toLowerCase()) {
         removeTask(index);
       }
     });
   };
 
-  let clearAllTasks = () => {
-    tasks = [];
+  // Export
+  return {
+    getTasks,
+    getTaskAmount,
+    getTask,
+    addTask,
+    setTask,
+    removeTask,
+    clearAllTasks,
+    clearTaskOfCategory,
   };
 })();

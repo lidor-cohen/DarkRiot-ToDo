@@ -1,15 +1,13 @@
-export default class Task {
-  #taskTemplate = {
-    id: 0,
-    taskName: "",
-    category: "",
-    completed: false,
-  };
+import { format } from "date-fns";
 
-  constructor(taskName, category) {
+export default class Task {
+  constructor(taskName, description, category, dueDate, priority) {
     this.taskName = taskName;
     this.category = category;
-
-    TaskController.addTask(this);
+    this.description = description;
+    this.dueDate = dueDate === undefined ? null : format(dueDate, "dd-MM-yyyy");
+    this.priority = priority === undefined ? 0 : priority;
+    this.subTasks = [];
+    this.completed = false;
   }
 }

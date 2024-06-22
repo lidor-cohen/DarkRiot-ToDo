@@ -1,7 +1,19 @@
+.content-container {
+  flex: 2;
+  padding: 3em;
+  height: 100%;
+}
+
+
 .content-section {
   display: none;
+
+  h1 {
+    font-size: 30px;
+  }
 }
 
 .active {
-  display: block;
+  display: flex;
+  height: 100%;
 }

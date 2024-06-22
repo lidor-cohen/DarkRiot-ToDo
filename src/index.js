@@ -8,5 +8,19 @@ import Task from "./js/task.js";
 import TaskController from "./js/taskController.js";
 import "./js/home-content-controller.js";
 
-addAllAnimations();
-initMenu();
+function init() {
+  addAllAnimations();
+  initMenu();
+
+  TaskController.addTask(
+    new Task("Task 1", "Description 1", "General", new Date(2024, 2, 15), 1)
+  );
+  TaskController.addTask(
+    new Task("Task 2", "Description 2", "Army", new Date(2024, 2, 15), 1)
+  );
+  TaskController.addTask(
+    new Task("Task 3", "Description 3", "Medical", new Date(2024, 2, 15), 1)
+  );
+}
+
+init();

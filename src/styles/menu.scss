@@ -1,79 +1,87 @@
 // Ratio between menu and content section is 1:2
 .menu-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    gap: 100px;
-    padding: 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 5em;
+  padding: 3em;
 }
 
 .content-section {
-    flex: 2;
-    padding: 50px;
+  flex: 2;
+  padding: 3em;
 }
-
 
 // Designing the Menu Section
 
 .menu-item {
-    display: flex;
+  display: flex;
 }
 
 #welcome-wrapper {
-    align-items: center;
-    cursor: default;
-    gap: 12px;
+  align-items: center;
+  cursor: default;
+  gap: 12px;
 
-    img {
-        width: 70px;
-        height: auto;
-    }
+  img {
+    width: 4rem;
+    height: auto;
+  }
 }
 
 #options-wrapper {
-    flex-grow: 1;
-    flex-direction: column;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 10px;
+
+  .option-item {
+    display: flex;
+    align-items: center;
     gap: 10px;
+    padding: 7.5px;
+    border-radius: 10px;
+  }
 
-    .option-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 7.5px;
-        border-radius: 10px;
-    }
+  .option-item h4 {
+    font-weight: 400;
+  }
 
-    .option-item h4 {
-        font-size: 18px;
-        font-weight: 400;
-    }
+  .option-item img {
+    width: 1.6em;
+    height: auto;
+  }
 
-    .option-item img {
-        width: 35px;
-        height: auto;
-    }
+  #list-button {
+    justify-content: space-between;
+  }
+
+  .img-text-option-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 #account-wrapper {
-    cursor: pointer;
-    align-items: center;
-    padding: 5px;
-    border-radius: 10px;
-    border: none;
-    gap:12px;
+  cursor: pointer;
+  align-items: center;
+  padding: 0.2em;
+  border-radius: 10px;
+  border: none;
+  gap: 1em;
 
-    h1 {
-        font-size: 1.4rem;
-    }
+  h1 {
+    font-size: 1.2rem;
+  }
 
-    h4 {
-        font-size: 1rem;
-    }
+  h4 {
+    font-size: 0.9rem;
+  }
 
-    img {
-        width: 50px;
-        height: auto;
-    }
+  img {
+    width: 2em;
+    height: auto;
+  }
 }

@@ -1,6 +1,32 @@
 const clickableMenuItem = document.querySelectorAll(".clickable-menu-item");
 const accountWrapper = document.querySelector("#account-wrapper");
+const primaryButtons = document.querySelectorAll(".primary-button");
 
+function buttonAnimation() {
+  primaryButtons.forEach((button) => {
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      button.style.backgroundColor = "rgba(255,255,255,0.3)";
+      button.style.outline = "1px solid rgba(255, 255, 255, 0.8)";
+      button.style.transition = "0.1s ease";
+    });
+
+    button.addEventListener("mouseenter", () => {
+      button.style.backgroundColor = "rgba(255,255,255,0.2)";
+      button.style.outline = "1px solid rgba(255, 255, 255, 0.2)";
+      button.style.transition = "0.1s ease";
+
+      button.addEventListener("mouseleave", () => {
+        button.style.backgroundColor = "";
+        button.style.outline = "";
+
+        setTimeout(() => {
+          button.style.transition = "";
+        }, 200);
+      });
+    });
+  });
+}
 function addMenuItemsAnimations() {
   clickableMenuItem.forEach((button) => {
     button.addEventListener("click", () => {
@@ -12,14 +38,9 @@ function addMenuItemsAnimations() {
       button.style.backgroundColor = "rgba(255,255,255,0.05)";
       button.style.outline = "1px solid rgba(255, 255, 255, 0.2)";
       button.style.transition = "0.2s ease";
-
-      button.addEventListener("mouseleave", () => {
-        button.style.transition = "";
-      });
     });
   });
 }
-
 function addAccountWrapperAnimations() {
   accountWrapper.addEventListener("mouseenter", () => {
     accountWrapper.style.boxShadow = "0 0 20px rgba(255, 255, 255, 0.502)";
@@ -42,6 +63,7 @@ function addAccountWrapperAnimations() {
 export default function addAllAnimations() {
   addMenuItemsAnimations();
   addAccountWrapperAnimations();
+  buttonAnimation();
 }
 
 export function initMenu() {

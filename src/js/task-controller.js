@@ -1,4 +1,5 @@
 import openImage from "../assets/open-90.png";
+import { addMenuItemsAnimations } from "./menu-animations.js";
 
 export default (function TaskController() {
   let tasks = [];
@@ -22,6 +23,20 @@ export default (function TaskController() {
   };
 
   // DOM manipulation
+  function updateTaskLengthHeader() {
+    // Task Header
+    const totalTaskHeader = document.getElementById("total-task-header");
+    totalTaskHeader.textContent = getTaskAmount();
+
+    // Task List
+    const taskList = document.querySelector(".task-view");
+    taskList.innerHTML = "";
+    tasks.forEach((task) => {
+      const taskItem = createTaskItem(task);
+      taskList.appendChild(taskItem);
+    });
+  }
+
   function createTaskItem(task) {
     // Initial Element
     const taskItem = document.createElement("div");
@@ -51,18 +66,39 @@ export default (function TaskController() {
 
     return taskItem;
   }
-  function updateDOM() {
-    // Task Header
-    const totalTaskHeader = document.getElementById("total-task-header");
-    totalTaskHeader.textContent = getTaskAmount();
 
-    // Task List
-    const taskList = document.querySelector(".task-view");
-    taskList.innerHTML = "";
+  function createCategoryContainers() {
+    const categoryContainer = document.querySelector(
+      "#category-list-container"
+    );
+    categoryContainer.innerHTML = "";
+    let categories = [];
+
     tasks.forEach((task) => {
-      const taskItem = createTaskItem(task);
-      taskList.appendChild(taskItem);
+      if (!categories.includes(task.category)) {
+        categories.push(task.category);
+      }
     });
+
+    // Create categories
+    categories.forEach((category) => {
+      const categoryElement = document.createElement("div");
+      categoryElement.classList.add(
+        "option-item",
+        "clickable-menu-item",
+        "category-item"
+      );
+      categoryElement.textContent = category;
+
+      categoryContainer.appendChild(categoryElement);
+    });
+
+    console.log(categories);
+  }
+
+  function updateDOM() {
+    updateTaskLengthHeader();
+    createCategoryContainers();
   }
 
   // Export

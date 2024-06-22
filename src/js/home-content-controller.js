@@ -1,4 +1,4 @@
-import TaskController from "./taskController.js";
+import TaskController from "./task-controller.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   (function contentController() {

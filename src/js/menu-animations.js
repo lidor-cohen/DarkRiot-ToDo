@@ -8,7 +8,12 @@ function buttonAnimation() {
       event.stopPropagation();
       button.style.backgroundColor = "rgba(255,255,255,0.3)";
       button.style.outline = "1px solid rgba(255, 255, 255, 0.8)";
-      button.style.transition = "0.1s ease";
+      button.style.transition = "0.2s ease";
+
+      setTimeout(() => {
+        button.style.backgroundColor = "";
+        button.style.outline = "";
+      }, 100);
     });
 
     button.addEventListener("mouseenter", () => {

@@ -2,6 +2,7 @@ import Task from "./js/task.js";
 import TaskController from "./js/task-controller.js";
 import { updateHompage } from "./js/home-content-controller.js";
 import "./js/menu-animations.js";
+import "./js/content-controller.js";
 
 import "./styles/main.scss";
 import "./styles/menu.scss";

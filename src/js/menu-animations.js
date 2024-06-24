@@ -1,4 +1,6 @@
-function primaryButtonsAnimations() {
+let firstRun = true;
+
+export function primaryButtonsAnimations() {
   const primaryButtons = document.querySelectorAll(".primary-button");
 
   // Default styling
@@ -37,7 +39,7 @@ function primaryButtonsAnimations() {
   });
 }
 
-function menuButtonsAnimations() {
+export function menuButtonsAnimations() {
   const menuButtons = document.querySelectorAll(".clickable-menu-item");
   let menuClicked = menuButtons[0];
 
@@ -45,16 +47,16 @@ function menuButtonsAnimations() {
   function clickStyle(button = menuClicked) {
     // Set selected button to hover style
     button.style.backgroundColor = "rgba(255,255,255,0.05)";
-    button.style.outline = "1px solid rgba(255,255,255,0.4)";
-    button.style.transition = "0.1s ease";
+    button.style.border = "1px solid rgba(255,255,255,0.4)";
+    button.style.transition = ".3s ease";
   }
 
   // Click styling
   function resetStyle(button) {
     // Set selected button to hover style
     button.style.backgroundColor = "";
-    button.style.outline = "";
-    button.style.transition = "0.1s ease";
+    button.style.border = "";
+    button.style.transition = ".3s ease";
   }
 
   // Click handling
@@ -75,10 +77,8 @@ function menuButtonsAnimations() {
     button.addEventListener("click", handleClick);
   });
 
-  document.addEventListener("DOMContentLoaded", () => clickStyle(menuClicked));
-}
-
-export default function updateDom() {
-  primaryButtonsAnimations();
-  menuButtonsAnimations();
+  if (firstRun) {
+    clickStyle(menuClicked);
+    firstRun = false;
+  }
 }

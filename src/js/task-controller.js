@@ -7,6 +7,17 @@ export default (function TaskController() {
   let getTasks = () => tasks;
   let getTaskAmount = () => tasks.length;
   let getTask = (index) => tasks[index];
+  let getTaskOfCategory = (categoryName) => {
+    tasks.forEach((task, index) => {
+      console.log(tasks);
+      let newTaskList = [];
+      if (task.category.name.toLowerCase() === categoryName.toLowerCase()) {
+        newTaskList.push(task);
+      }
+
+      return newTaskList;
+    });
+  };
 
   // Setters
   let addTask = (task) => tasks.push(task);
@@ -22,13 +33,13 @@ export default (function TaskController() {
   };
 
   // Examples
-  function addRandomTasks(numTasks = 3) {
+  function addRandomTasks(numTasks = 3, categoryName = "General") {
     for (let i = 1; i <= numTasks; i++) {
       addTask(
         new Task(
           `Task ${i}`,
+          `${categoryName}`,
           `Description ${i}`,
-          "General",
           new Date(2024, 2, 15),
           1
         )
@@ -41,6 +52,7 @@ export default (function TaskController() {
     getTasks,
     getTaskAmount,
     getTask,
+    getTaskOfCategory,
     addTask,
     setTask,
     removeTask,

@@ -1,6 +1,12 @@
+import DomHandler from "./dom-handler.js";
+import Task from "./task.js";
+import taskController from "./task-controller.js";
+
 const mainContentSection = document.getElementById("content-container");
 
-function showSection(sections, sectionId) {
+function showSection(sectionId) {
+  const sections = document.querySelectorAll(".content-section");
+
   // Hide all sections
   sections.forEach(function (section) {
     section.classList.remove("active");
@@ -16,25 +22,22 @@ function showSection(sections, sectionId) {
 // Assign to each button his section change
 (function contentController() {
   // Get buttons
-  const sections = document.querySelectorAll(".content-section");
   const homeButton = document.getElementById("home-button");
   const listViewButton = document.getElementById("list-button");
 
   // Show default section
-  showSection(sections, "home-section");
+  showSection("home-section");
 
   // Add functionality to home button
-  homeButton.addEventListener("click", () =>
-    showSection(sections, "home-section")
-  );
+  homeButton.addEventListener("click", () => showSection("home-section"));
 
   // Add functionality to 'my-lists' button
   listViewButton.addEventListener("click", () =>
-    showSection(sections, "list-view-section")
+    showSection("list-view-section")
   );
 })();
 
-function createSection(sectionName) {
+export function createSection(sectionName) {
   const sections = document.querySelectorAll(".content-section");
 
   // create section id `{sectionName}-section`
@@ -52,11 +55,15 @@ function createSection(sectionName) {
   if (document.getElementById(sectionID) === null) {
     contentDiv.id = sectionID;
     mainContentSection.appendChild(contentDiv);
-
     showSection(sections, sectionID);
   } else {
     console.log("List already exists");
+    return 0;
   }
-}
 
-createSection("army");
+  showSection(sectionID);
+  taskController.addTask(
+    new Task("§Control§", sectionName, "This is a control task")
+  );
+  DomHandler.updateAll();
+}

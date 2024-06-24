@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 export default class Task {
-  constructor(taskName, description, category, dueDate, priority) {
+  constructor(taskName, category, description, dueDate, priority) {
     this.taskName = taskName;
     this.category = category;
     this.description = description;

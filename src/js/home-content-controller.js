@@ -1,8 +1,9 @@
 import TaskController from "./task-controller.js";
-import updateDom from "./menu-animations.js";
 
 import openImage from "../assets/open-90.png";
 import listItemImage from "../assets/list-item-90.png";
+
+const categoryContainer = document.querySelector("#category-list-container");
 
 function createTaskItem(task) {
   // Initial Element
@@ -34,27 +35,56 @@ function createTaskItem(task) {
   return taskItem;
 }
 
-function updateTaskLengthHeader() {
+export function addNewCategory(categoryName) {
+  const categoryElement = document.createElement("div");
+
+  // Category Title
+  const categoryTitle = document.createElement("h4");
+  categoryTitle.textContent = categoryName;
+
+  // Category Icon
+  const categoryIcon = document.createElement("img");
+  categoryIcon.src = listItemImage;
+
+  // Category Content Wrapper
+  const categoryContentWrapper = document.createElement("div");
+  categoryContentWrapper.classList.add("img-text-option-wrapper");
+  categoryContentWrapper.appendChild(categoryIcon);
+  categoryContentWrapper.appendChild(categoryTitle);
+
+  categoryElement.appendChild(categoryContentWrapper);
+
+  categoryElement.classList.add(
+    "clickable-menu-item",
+    "category-item",
+    "option-item"
+  );
+  categoryElement.style.paddingLeft = "20px";
+
+  categoryContainer.appendChild(categoryElement);
+}
+
+export function updateTaskLengthHeader() {
   // Task Header
   const totalTaskHeader = document.getElementById("total-task-header");
   totalTaskHeader.textContent = TaskController.getTaskAmount();
 }
 
-function updateTaskList() {
+export function updateTaskList() {
   // Task List
   const taskList = document.querySelector(".task-view");
   taskList.innerHTML = "";
   TaskController.getTasks().forEach((task) => {
-    const taskItem = createTaskItem(task);
-    taskList.appendChild(taskItem);
+    console.log(task);
+    if (task.taskName !== "§Control§") {
+      const taskItem = createTaskItem(task);
+      taskList.appendChild(taskItem);
+    }
   });
 }
 
 // Create the lists buttons underneath the "Your Lists" section
-function createCategoryContainers() {
-  // get the category list container
-  const categoryContainer = document.querySelector("#category-list-container");
-
+export function createCategoryContainers() {
   // reset the category list container
   categoryContainer.innerHTML = "";
   let categories = [];
@@ -68,38 +98,6 @@ function createCategoryContainers() {
 
   // Create categories
   categories.forEach((category) => {
-    const categoryElement = document.createElement("div");
-
-    // Category Title
-    const categoryTitle = document.createElement("h4");
-    categoryTitle.textContent = category;
-
-    // Category Icon
-    const categoryIcon = document.createElement("img");
-    categoryIcon.src = listItemImage;
-
-    // Category Content Wrapper
-    const categoryContentWrapper = document.createElement("div");
-    categoryContentWrapper.classList.add("img-text-option-wrapper");
-    categoryContentWrapper.appendChild(categoryIcon);
-    categoryContentWrapper.appendChild(categoryTitle);
-
-    categoryElement.appendChild(categoryContentWrapper);
-
-    categoryElement.classList.add(
-      "clickable-menu-item",
-      "category-item",
-      "option-item"
-    );
-    categoryElement.style.paddingLeft = "20px";
-
-    categoryContainer.appendChild(categoryElement);
+    addNewCategory(category);
   });
-}
-
-export function updateHompage() {
-  updateTaskLengthHeader();
-  updateTaskList();
-  createCategoryContainers();
-  updateDom();
 }

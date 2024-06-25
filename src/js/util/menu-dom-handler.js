@@ -5,7 +5,7 @@ import { taskController } from "../classes/task-controller";
 const listContainer = document.getElementById("category-list-container");
 
 // Add category to "your lists" menu
-const addCategoryToList = (categoryName) => {
+const addCategoryToList = (categoryName, deletable = true) => {
   // Create list item to append
   const listItem = `
     <div style="padding-left:1.5rem" class="clickable-menu-item category-item option-item">
@@ -14,7 +14,11 @@ const addCategoryToList = (categoryName) => {
             <h4>${categoryName}</h4>
         </div>
 
-        <img src="${deleteItemImage}" alt="delete item sign" />
+        ${
+          deletable
+            ? `<img src="${deleteItemImage}" alt="delete item sign" />`
+            : ``
+        }
     </div>
     `;
 

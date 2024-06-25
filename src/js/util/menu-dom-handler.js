@@ -1,4 +1,5 @@
 import listItemImage from "../../assets/list-item-90.png";
+import deleteItemImage from "../../assets/delete-90.png";
 import { taskController } from "../classes/task-controller";
 
 const listContainer = document.getElementById("category-list-container");
@@ -12,6 +13,8 @@ const addCategoryToList = (categoryName) => {
             <img src="${listItemImage}" alt="list item sign" />
             <h4>${categoryName}</h4>
         </div>
+
+        <img src="${deleteItemImage}" alt="delete item sign" />
     </div>
     `;
 
@@ -30,4 +33,4 @@ const updateMenuCategories = () => {
   uniqueCategoryList.forEach((category) => addCategoryToList(category));
 };
 
-export { updateMenuCategories };
+export { addCategoryToList, updateMenuCategories };

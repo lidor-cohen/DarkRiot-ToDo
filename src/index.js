@@ -1,21 +1,18 @@
 import "./js/css-imports";
 import { Task } from "./js/classes/task";
 import { taskController } from "./js/classes/task-controller";
-import {
-  addCategoryToList,
-  updateMenuCategories,
-} from "./js/util/menu-dom-handler";
-
-import { addTaskToView } from "./js/util/content-dom-handler";
+import { menuController } from "./js/util/menu-dom-handler";
 
 function init() {
-  addCategoryToList("General", false);
+  taskController.addTask(new Task("Kill Sister", "General"));
+  taskController.addTask(new Task("Kill Mother", "Army"));
+  taskController.addTask(new Task("Kill Mother", "Army"));
+  taskController.addTask(new Task("Kill Mother", "Army"));
+  taskController.addTask(new Task("Kill Mother", "Army"));
+  taskController.addTask(new Task("Kill Mother", "Army"));
 
-  addTaskToView(
-    new Task("Kill Mother", "General"),
-    document.getElementById("home-task-view")
-  );
-  updateMenuCategories();
+  console.log(taskController.getAllTasks());
+  menuController.updateCategories();
 }
 
 init();

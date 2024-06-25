@@ -1,4 +1,5 @@
 import { Task } from "../classes/task";
+import { addTaskToView } from "../util/content-dom-handler";
 
 // Define the TaskController class as a constructor function
 function TaskController() {
@@ -10,6 +11,10 @@ function TaskController() {
 TaskController.prototype = {
   // Method to add a new task
   addTask: function (task) {
+    addTaskToView(
+      task,
+      document.getElementById(task.category.toLowerCase() + "-section")
+    );
     return this.tasks.push(task);
   },
 
@@ -45,4 +50,5 @@ TaskController.prototype = {
 };
 
 // Create global task controller
-export const taskController = new TaskController();
+const taskController = new TaskController();
+export { taskController };

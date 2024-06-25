@@ -1,6 +1,10 @@
 import "./js/css-imports";
 import { Task } from "./js/classes/task";
 import { taskController } from "./js/classes/task-controller";
+import {
+  addCategoryToList,
+  updateMenuCategories,
+} from "./js/util/menu-dom-handler";
 
 function init() {
   const task1 = new Task("Lidor", "Army");
@@ -11,7 +15,8 @@ function init() {
   taskController.addTask(task2);
   taskController.addTask(task3);
   taskController.addTask(task4);
-  console.log(taskController.getAllTasks());
+
+  updateMenuCategories();
 }
 
 init();

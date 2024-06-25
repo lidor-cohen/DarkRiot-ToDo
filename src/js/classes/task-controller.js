@@ -47,6 +47,17 @@ TaskController.prototype = {
     }
     return this.tasks;
   },
+
+  getUniqueCategories: function () {
+    let uniqueCategoryList = [];
+    this.getAllTasks().forEach((task) => {
+      if (!uniqueCategoryList.includes(task.category)) {
+        uniqueCategoryList.push(task.category);
+      }
+    });
+
+    return uniqueCategoryList;
+  },
 };
 
 // Create global task controller

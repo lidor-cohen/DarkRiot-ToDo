@@ -1,6 +1,8 @@
 import listItemImage from "../../assets/list-item-90.png";
 import deleteItemImage from "../../assets/delete-90.png";
 import { taskController } from "../classes/task-controller";
+import { Task } from "../classes/task";
+import { contentController } from "./content-dom-handler";
 
 function MenuController() {
   this.listContainer = document.getElementById("category-list-container");
@@ -11,7 +13,7 @@ MenuController.prototype = {
   addCategoryToList: function (categoryName, deletable = true) {
     // Create list item to append
     const listItem = `
-    <div style="padding-left:1.5rem" class="clickable-menu-item category-item option-item">
+    <div style="padding-left:1.5rem" class="clickable-menu-item category-item option-item category-clickable">
         <div class="img-text-option-wrapper">
             <img src="${listItemImage}" alt="list item sign" />
             <h4>${categoryName}</h4>
@@ -30,16 +32,53 @@ MenuController.prototype = {
   },
 
   updateCategories: function () {
-    let uniqueCategoryList = [];
-    taskController.getAllTasks().forEach((task) => {
-      if (!uniqueCategoryList.includes(task.category)) {
-        uniqueCategoryList.push(task.category);
-      }
-    });
+    const uniqueCategoryList = taskController.getUniqueCategories();
 
     uniqueCategoryList.forEach((category) =>
       this.addCategoryToList(category, category === "General" ? false : true)
     );
+  },
+
+  bindEvents: function () {
+    // if (firstRun) {
+    //   const homeButton = document.getElementById("home-button");
+    //   const yourListsButton = document.getElementById("list-button");
+
+    //   homeButton.addEventListener(
+    //     "click",
+    //     () => {
+    //       contentController.changeView("home");
+    //     },
+    //     false
+    //   );
+
+    //   yourListsButton.addEventListener("click", () => {
+    //     contentController.changeView("list-view-section");
+    //   });
+    // }
+
+    const uniqueCategoryList = taskController.getUniqueCategories();
+    const categoryListButtons = document.querySelectorAll(
+      ".category-clickable"
+    );
+
+    uniqueCategoryList.forEach((category) =>
+      contentController.createSectionOfCategory(category)
+    );
+
+    categoryListButtons.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          contentController.changeView(
+            contentController.getCategoryId(
+              button.querySelector("h4").textContent
+            )
+          );
+        },
+        false
+      );
+    });
   },
 };
 

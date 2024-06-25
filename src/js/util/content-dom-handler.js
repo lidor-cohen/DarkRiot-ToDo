@@ -1,11 +1,14 @@
 import openImage from "../../assets/open-90.png";
 
-// Homepage Controls
-// Add task to container
-const addTaskToView = (task, container) => {
-  const homeTaskListView = document.getElementById("home-task-view");
+function ContentController() {}
 
-  const taskItem = `
+ContentController.prototype = {
+  // Homepage Controls
+  // Add task to container
+  addTaskToView: function (task, container) {
+    const homeTaskListView = document.getElementById("home-task-view");
+
+    const taskItem = `
           <div class="task-item">
               <div class="task-checkbox-container">
                   <input type="checkbox" />
@@ -16,12 +19,14 @@ const addTaskToView = (task, container) => {
           </div>
       `;
 
-  if (!container) {
-    container = document.querySelector(".active");
-    container.innerHTML += taskItem;
-  } else {
-    homeTaskListView.innerHTML += taskItem;
-  }
+    if (container) {
+      container = document.querySelector(".active");
+      container.innerHTML += taskItem;
+    } else {
+      homeTaskListView.innerHTML += taskItem;
+    }
+  },
 };
 
-export { addTaskToView };
+const contentController = new ContentController();
+export { contentController };

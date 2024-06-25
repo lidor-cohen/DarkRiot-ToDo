@@ -30,7 +30,6 @@ MenuController.prototype = {
   },
 
   updateCategories: function () {
-    console.log("ENTERED");
     let uniqueCategoryList = [];
     taskController.getAllTasks().forEach((task) => {
       if (!uniqueCategoryList.includes(task.category)) {
@@ -38,7 +37,9 @@ MenuController.prototype = {
       }
     });
 
-    uniqueCategoryList.forEach((category) => this.addCategoryToList(category));
+    uniqueCategoryList.forEach((category) =>
+      this.addCategoryToList(category, category === "General" ? false : true)
+    );
   },
 };
 

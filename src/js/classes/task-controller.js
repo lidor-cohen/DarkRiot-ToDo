@@ -1,5 +1,5 @@
 import { Task } from "../classes/task";
-import { addTaskToView } from "../util/content-dom-handler";
+import { contentController } from "../util/content-dom-handler";
 
 // Define the TaskController class as a constructor function
 function TaskController() {
@@ -11,7 +11,7 @@ function TaskController() {
 TaskController.prototype = {
   // Method to add a new task
   addTask: function (task) {
-    addTaskToView(
+    contentController.addTaskToView(
       task,
       document.getElementById(task.category.toLowerCase() + "-section")
     );

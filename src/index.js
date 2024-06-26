@@ -6,11 +6,9 @@ import { contentController } from "./js/util/content-dom-handler";
 
 function init() {
   taskController.addTask(new Task("Demo Task", "General"));
+  taskController.addTask(new Task("Demo2 Task", "Army"));
 
-  menuController.bindEvents();
-  menuController.updateCategories();
-
-  contentController.changeView(contentController.getCategoryId("General"));
+  menuController.updateDom();
 }
 
 init();

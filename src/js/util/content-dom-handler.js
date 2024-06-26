@@ -27,7 +27,7 @@ ContentController.prototype = {
 
     // if specified a specific container then append the task
     // to it, else, append it to the active container
-    if (container) {
+    if (!container) {
       container = document.querySelector(".active");
       container.innerHTML += taskItem;
     } else {

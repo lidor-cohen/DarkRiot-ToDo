@@ -6,6 +6,7 @@ import { contentController } from "./content-dom-handler";
 
 function MenuController() {
   this.listContainer = document.getElementById("category-list-container");
+  this.firstRun = true;
 }
 
 MenuController.prototype = {
@@ -13,7 +14,7 @@ MenuController.prototype = {
   addCategoryToList: function (categoryName, deletable = true) {
     // Create list item to append
     const listItem = `
-    <div style="padding-left:1.5rem" class="clickable-menu-item category-item option-item category-clickable">
+    <div style="padding-left:1.5rem" class="clickable-menu-item category-item option-item category-clickable"">
         <div class="img-text-option-wrapper">
             <img src="${listItemImage}" alt="list item sign" />
             <h4>${categoryName}</h4>
@@ -40,36 +41,33 @@ MenuController.prototype = {
   },
 
   bindEvents: function () {
-    // if (firstRun) {
-    //   const homeButton = document.getElementById("home-button");
-    //   const yourListsButton = document.getElementById("list-button");
+    if (this.firstRun) {
+      this.firstRun = true;
+      const homeButton = document.getElementById("home-button");
+      const yourListsButton = document.getElementById("list-button");
 
-    //   homeButton.addEventListener(
-    //     "click",
-    //     () => {
-    //       contentController.changeView("home");
-    //     },
-    //     false
-    //   );
+      homeButton.addEventListener(
+        "click",
+        () => {
+          contentController.changeView(contentController.getCategoryId("home"));
+        },
+        false
+      );
 
-    //   yourListsButton.addEventListener("click", () => {
-    //     contentController.changeView("list-view-section");
-    //   });
-    // }
+      yourListsButton.addEventListener("click", () => {
+        contentController.changeView("list-view-section");
+      });
+    }
 
-    const uniqueCategoryList = taskController.getUniqueCategories();
     const categoryListButtons = document.querySelectorAll(
       ".category-clickable"
-    );
-
-    uniqueCategoryList.forEach((category) =>
-      contentController.createSectionOfCategory(category)
     );
 
     categoryListButtons.forEach((button) => {
       button.addEventListener(
         "click",
         () => {
+          console.log("clicked");
           contentController.changeView(
             contentController.getCategoryId(
               button.querySelector("h4").textContent
@@ -79,6 +77,11 @@ MenuController.prototype = {
         false
       );
     });
+  },
+
+  updateDom: function () {
+    this.updateCategories();
+    this.bindEvents();
   },
 };
 

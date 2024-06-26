@@ -65,15 +65,21 @@
 
           <div class="task-form-field">
             <label for="dialog-input-category">Category</label>
+            <select
+              name="category-selection"
+              id="dialog-input-category"
+            ></select>
           </div>
 
           <div class="task-form-field">
-            <label for="dialog-input-taskname">Task Name</label>
-            <input type="text" id="dialog-input-taskname" required />
+            <label id="priority-label" for="dialog-input-priority"
+              >Priority (50)</label
+            >
+            <input type="range" id="dialog-input-priority" required />
           </div>
 
           <div class="task-form-field">
-            <label for="dialog-input-taskname">Task Name</label>
+            <label for="dialog-input-duedate">Task Name</label>
             <input type="text" id="dialog-input-taskname" required />
           </div>
         </form>

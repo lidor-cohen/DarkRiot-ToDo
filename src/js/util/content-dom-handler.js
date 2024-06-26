@@ -1,4 +1,5 @@
 import openImage from "../../assets/open-90.png";
+import { taskController } from "../classes/task-controller";
 
 function ContentController() {
   this.contentContainer = document.getElementById("content-container");
@@ -8,37 +9,39 @@ ContentController.prototype = {
   getCategoryId: (categoryName) =>
     categoryName.toLowerCase().replace(" ", "-") + "-section",
 
-  // Homepage Controls
-
   // Add task to task-view container
-  addTaskToView: function (task, container) {
-    const homeTaskListView = document.getElementById("home-task-view");
+  renderTasks: function () {
+    const container = document.querySelector(".active");
+    let categorySelected = container.id.substring(
+      0,
+      container.id.indexOf("-section")
+    );
 
-    const taskItem = `
-          <div class="task-item">
-              <div class="task-checkbox-container">
-                  <input type="checkbox" />
-                  <h4>${task.name}</h4>
-              </div>
-  
-              <img src="${openImage}" alt="open task icon" />
+    const taskViewContainer = container.children[1];
+
+    taskViewContainer.innerHTML = "";
+
+    taskController.getAllTasks(categorySelected).forEach((task) => {
+      const taskItem = `
+        <div class="task-item">
+          <div class="task-checkbox-container">
+            <input type="checkbox" />
+            <h4>${task.name}</h4>
           </div>
+    
+          <img src="${openImage}" alt="open task icon" />
+        </div>
       `;
 
-    // if specified a specific container then append the task
-    // to it, else, append it to the active container
-    if (!container) {
-      container = document.querySelector(".active");
-      container.innerHTML += taskItem;
-    } else {
-      homeTaskListView.innerHTML += taskItem;
-    }
+      taskViewContainer.innerHTML += taskItem;
+    });
   },
 
   createSectionOfCategory: function (categoryName) {
     const sectionHTML = `
       <div class="content-section" id="${this.getCategoryId(categoryName)}">
         <h1>${categoryName}</h1>
+        <div class="task-view" id=${categoryName.toLowerCase()}-task-view></div>
       </div>`;
 
     this.contentContainer.innerHTML += sectionHTML;
@@ -52,6 +55,8 @@ ContentController.prototype = {
 
     const activeSection = document.getElementById(sectionID);
     activeSection.classList.add("active");
+
+    this.renderTasks();
   },
 };
 

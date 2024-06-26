@@ -9,6 +9,7 @@ function init() {
   taskController.addTask(new Task("Demo2 Task", "Army"));
 
   menuController.updateDom();
+  contentController.renderTasks();
 }
 
 init();

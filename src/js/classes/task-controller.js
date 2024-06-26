@@ -12,11 +12,6 @@ TaskController.prototype = {
   // Method to add a new task
   addTask: function (task) {
     contentController.createSectionOfCategory(task.category);
-
-    contentController.addTaskToView(
-      task,
-      document.getElementById(task.category.toLowerCase() + "-section")
-    );
     return this.tasks.push(task);
   },
 
@@ -38,9 +33,9 @@ TaskController.prototype = {
   // Method to get all tasks
   getAllTasks: function (category) {
     let tasksOfCategory = [];
-    if (category) {
+    if (category && category.toLowerCase() !== "home") {
       this.tasks.forEach((task) => {
-        if (task.category === category) {
+        if (task.category.toLowerCase() === category.toLowerCase()) {
           tasksOfCategory.push(task);
         }
       });

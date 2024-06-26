@@ -67,7 +67,6 @@ MenuController.prototype = {
       button.addEventListener(
         "click",
         () => {
-          console.log("clicked");
           contentController.changeView(
             contentController.getCategoryId(
               button.querySelector("h4").textContent

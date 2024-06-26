@@ -54,7 +54,8 @@ MenuController.prototype = {
         false
       );
 
-      yourListsButton.addEventListener("click", () => {
+      yourListsButton.addEventListener("click", (e) => {
+        e.stopPropagation();
         contentController.changeView("list-view-section");
       });
     }
@@ -66,7 +67,8 @@ MenuController.prototype = {
     categoryListButtons.forEach((button) => {
       button.addEventListener(
         "click",
-        () => {
+        (e) => {
+          e.stopPropagation();
           contentController.changeView(
             contentController.getCategoryId(
               button.querySelector("h4").textContent

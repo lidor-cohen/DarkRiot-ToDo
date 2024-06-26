@@ -31,13 +31,8 @@
           </div>
           <div id="category-list-container"></div>
         </div>
-        <div id="account-wrapper" class="menu-item">
-          <img src="assets/account-90.png" alt="account icon" />
-
-          <div class="account-section-text">
-            <h1>Lidor Cohen</h1>
-            <h4>Your Account</h4>
-          </div>
+        <div id="add-task-wrapper" class="menu-item">
+          <h4>Add Task</h4>
         </div>
       </div>
       <hr />
@@ -52,5 +47,37 @@
         </div>
       </div>
     </div>
+
+    <dialog id="task-dialog-wrapper">
+      <div class="dialog-inner">
+        <h1>Create New Task</h1>
+
+        <form action="GET">
+          <div class="task-form-field">
+            <label for="dialog-input-taskname">Task Name</label>
+            <input type="text" id="dialog-input-taskname" required />
+          </div>
+
+          <div class="task-form-field">
+            <label for="dialog-input-description">Task Description</label>
+            <input type="text" id="dialog-input-description" required />
+          </div>
+
+          <div class="task-form-field">
+            <label for="dialog-input-category">Category</label>
+          </div>
+
+          <div class="task-form-field">
+            <label for="dialog-input-taskname">Task Name</label>
+            <input type="text" id="dialog-input-taskname" required />
+          </div>
+
+          <div class="task-form-field">
+            <label for="dialog-input-taskname">Task Name</label>
+            <input type="text" id="dialog-input-taskname" required />
+          </div>
+        </form>
+      </div>
+    </dialog>
   </body>
 </html>

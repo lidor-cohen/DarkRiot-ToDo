@@ -11,7 +11,7 @@ class Task {
     this.name = name;
     this.category = category;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = dueDate == null ? addDays(new Date(), 1) : dueDate;
     this.priority = priority;
     this.completed = false;
   }

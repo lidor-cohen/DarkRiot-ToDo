@@ -12,6 +12,7 @@ TaskController.prototype = {
   // Method to add a new task
   addTask: function (task) {
     contentController.createSectionOfCategory(task.category);
+    contentController.renderContent();
     return this.tasks.push(task);
   },
 

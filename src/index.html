@@ -52,7 +52,7 @@
       <div class="dialog-inner">
         <h1>Create New Task</h1>
 
-        <form action="GET">
+        <form id="new-task-form">
           <div class="task-form-field">
             <label for="dialog-input-taskname">Task Name</label>
             <input type="text" id="dialog-input-taskname" required />
@@ -68,6 +68,7 @@
             <select
               name="category-selection"
               id="dialog-input-category"
+              required
             ></select>
           </div>
 
@@ -79,9 +80,13 @@
           </div>
 
           <div class="task-form-field">
-            <label for="dialog-input-duedate">Task Name</label>
-            <input type="text" id="dialog-input-taskname" required />
+            <label for="dialog-input-duedate">Due Date</label>
+            <input type="date" id="dialog-input-duedate" required />
           </div>
+
+          <button class="regular-button" id="submit-task-button" type="submit">
+            Add Task
+          </button>
         </form>
       </div>
     </dialog>

@@ -6,11 +6,10 @@ import { contentController } from "./js/util/content-dom-handler";
 import { taskWindowController } from "./js/util/task-dom-handler";
 
 function init() {
-  taskController.addTask(new Task("Demo Task", "General"));
+  taskController.addTask(new Task("General Task", "General"));
   taskController.addTask(new Task("Army Task", "Army"));
   taskController.addTask(new Task("Medical Task", "Medical"));
   taskController.addTask(new Task("Class Task", "Class"));
-  taskController.addTask(new Task("Class Task 2", "Class"));
 
   menuController.updateDom();
   contentController.renderContent();

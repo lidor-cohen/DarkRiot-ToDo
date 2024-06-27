@@ -87,8 +87,8 @@ $checked-box: url("../assets/checked-90.png");
 }
 
 #task-dialog-wrapper {
-  width: 800px;
-  height: 500px;
+  width: 650px;
+  height: max-content;
 
   // Center the Dialog
   position: absolute;
@@ -138,7 +138,7 @@ $checked-box: url("../assets/checked-90.png");
         gap: 1em;
         align-items: center;
         label {
-          flex: 0.3;
+          flex: 0.5;
         }
         input {
           flex: 1;
@@ -192,6 +192,35 @@ $checked-box: url("../assets/checked-90.png");
               @include slider-track;
             }
           }
+
+          &[type="date"] {
+            border: 0.2em solid #ffffff;
+            padding: 0.8em 0.9em;
+            border-radius: 2em;
+            background: rgba(#a6a6a6, 0.2);
+            border-radius: 0.2em 0.2em 0 0;
+            border: none;
+            outline: 0.1em solid #c7c7c7;
+
+            color: #ffffff;
+            text-align: center;
+            // &::-webkit-datetime-edit { padding: 1em; }
+            // &::-webkit-datetime-edit-fields-wrapper { background: rgba(#E91E63, .2); }
+            &::-webkit-datetime-edit-text {
+              color: rgb(255, 255, 255);
+              padding: 0 0.3em;
+            }
+            // &::-webkit-datetime-edit-month-field { color: #E91E63; }
+            // &::-webkit-datetime-edit-day-field { color: #E91E63; }
+            // &::-webkit-datetime-edit-year-field { color: #E91E63; }
+            &::-webkit-inner-spin-button {
+              display: none;
+            }
+
+            &::-webkit-calendar-picker-indicator {
+              filter: invert(1);
+            }
+          }
         }
 
         select {
@@ -211,4 +240,18 @@ $checked-box: url("../assets/checked-90.png");
       }
     }
   }
+}
+
+.regular-button {
+  padding: 1em;
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(14.6px);
+  -webkit-backdrop-filter: blur(14.6px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }

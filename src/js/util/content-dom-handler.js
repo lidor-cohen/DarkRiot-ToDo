@@ -1,6 +1,7 @@
 import openImage from "../../assets/open-90.png";
 import { taskController } from "../classes/task-controller";
 import { menuController } from "./menu-dom-handler";
+import { format } from "date-fns";
 
 function ContentController() {
   this.contentContainer = document.getElementById("content-container");
@@ -25,7 +26,7 @@ ContentController.prototype = {
 
       taskController.getAllTasks(categorySelected).forEach((task) => {
         const taskItem = `
-        <div class="task-item">
+        <div id="task${task.id}" class="task-item">
           <div class="task-checkbox-container">
             <input type="checkbox" />
             <h4>${task.name}</h4>
@@ -52,6 +53,7 @@ ContentController.prototype = {
 
       menuController.bindEvents();
     }
+    this.bindEvents();
   },
 
   createSectionOfCategory: function (categoryName) {
@@ -74,6 +76,40 @@ ContentController.prototype = {
     activeSection.classList.add("active");
 
     this.renderContent();
+  },
+
+  bindEvents: function () {
+    (function openTaskButton() {
+      const buttons = document.querySelectorAll(".task-item img");
+      const dialogModal = document.querySelector("#task-show-wrapper");
+      const dialogContent = dialogModal.querySelector(
+        "#task-show-wrapper .dialog-inner"
+      );
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const task = taskController.getTaskOfID(button.parentElement.id);
+
+          const taskInfo = `
+            <div>
+              <h1>Task Name: ${task.name}</h1>
+              <h3>Task Description: ${
+                task.description === "" ? "No Description" : task.description
+              } </h3>
+              <h3>Task Category: ${task.category} </h3>
+              <h3>Task Priority: ${task.priority} </h3>
+              <h3>Task Due Date: ${format(
+                task.dueDate,
+                "dd-MM-yyy hh:mm"
+              )} </h3>
+            </div>
+          `;
+
+          dialogContent.innerHTML = taskInfo;
+          dialogModal.showModal();
+        });
+      });
+    })();
   },
 };
 

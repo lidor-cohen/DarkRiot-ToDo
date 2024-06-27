@@ -12,8 +12,10 @@ TaskController.prototype = {
   // Method to add a new task
   addTask: function (task) {
     contentController.createSectionOfCategory(task.category);
+    const returnVal = this.tasks.push(task);
     contentController.renderContent();
-    return this.tasks.push(task);
+
+    return returnVal;
   },
 
   // Method to mark a task as completed
@@ -55,6 +57,12 @@ TaskController.prototype = {
     });
 
     return uniqueCategoryList;
+  },
+
+  getTaskOfID: function (taskID) {
+    const taskID_number = taskID.substring(4, taskID.length);
+    console.log(this.tasks.filter((task) => task.id == taskID_number));
+    return this.tasks.filter((task) => task.id == taskID_number)[0];
   },
 };
 

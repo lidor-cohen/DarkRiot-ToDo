@@ -12,7 +12,6 @@ function init() {
   taskController.addTask(new Task("Class Task", "Class"));
 
   menuController.updateDom();
-  contentController.renderContent();
   taskWindowController.bindEvents();
 }
 

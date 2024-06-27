@@ -1,6 +1,8 @@
 import { addDays } from "date-fns";
 
 class Task {
+  static count = 0;
+
   constructor(
     name,
     category,
@@ -14,6 +16,8 @@ class Task {
     this.dueDate = dueDate == null ? addDays(new Date(), 1) : dueDate;
     this.priority = priority;
     this.completed = false;
+
+    this.id = ++Task.count;
   }
 }
 

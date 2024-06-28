@@ -19,21 +19,23 @@ TaskWindowController.prototype = {
         (this.priorityLabel.textContent = "Priority (" + e.target.value + ")")
     );
 
-    // Category Selector
-    this.categorySelect = document.getElementById("dialog-input-category");
-    this.categorySelect.innerHTML = "";
-    taskController.getUniqueCategories().forEach((category) => {
-      const optionItem = `
-        <option value="${category}">${category}</option>
-        `;
-
-      this.categorySelect.innerHTML += optionItem;
-    });
-
     // Add Task Button
     this.addTaskButton.addEventListener(
       "click",
-      () => this.taskDialog.showModal(),
+      () => {
+        // Category Selector
+        this.categorySelect = document.getElementById("dialog-input-category");
+        this.categorySelect.innerHTML = "";
+        taskController.getUniqueCategories().forEach((category) => {
+          const optionItem = `
+        <option value="${category}">${category}</option>
+        `;
+
+          this.categorySelect.innerHTML += optionItem;
+        });
+
+        this.taskDialog.showModal();
+      },
       false
     );
 

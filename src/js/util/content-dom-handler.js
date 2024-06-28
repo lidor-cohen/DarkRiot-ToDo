@@ -61,6 +61,7 @@ ContentController.prototype = {
   },
 
   createSectionOfCategory: function (categoryName) {
+    console.log(categoryName);
     const sectionHTML = `
       <div class="content-section" id="${this.getCategoryId(categoryName)}">
         <h1>${categoryName}</h1>

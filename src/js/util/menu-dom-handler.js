@@ -6,6 +6,10 @@ import { contentController } from "./content-dom-handler";
 
 function MenuController() {
   this.listContainer = document.getElementById("category-list-container");
+  this.addListDialog = document.getElementById("add-list-wrapper");
+  this.addListButton = document.getElementById("list-add-button");
+  this.actionAddList = document.getElementById("submit-newlist-button");
+  this.addListInput = document.getElementById("dialog-input-listname");
   this.firstRun = true;
 }
 
@@ -19,12 +23,6 @@ MenuController.prototype = {
             <img src="${listItemImage}" alt="list item sign" />
             <h4>${categoryName}</h4>
         </div>
-
-        ${
-          deletable
-            ? `<img src="${deleteItemImage}" alt="delete item sign" />`
-            : ``
-        }
     </div>
     `;
 
@@ -42,7 +40,7 @@ MenuController.prototype = {
 
   bindEvents: function () {
     if (this.firstRun) {
-      this.firstRun = true;
+      this.firstRun = false;
       const homeButton = document.getElementById("home-button");
       const yourListsButton = document.getElementById("list-button");
 
@@ -55,8 +53,27 @@ MenuController.prototype = {
       );
 
       yourListsButton.addEventListener("click", (e) => {
-        e.stopPropagation();
+        e.stopImmediatePropagation();
         contentController.changeView("list-view-section");
+      });
+
+      this.addListButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.addListDialog.showModal();
+      });
+
+      this.actionAddList.addEventListener("click", (e) => {
+        e.preventDefault();
+        const inputValue = this.addListInput.value.toString();
+        if (inputValue.length > 3) {
+          taskController.addTask(new Task(`${inputValue} Task`, inputValue));
+
+          this.updateDom();
+          this.addListDialog.close();
+          this.actionAddList.parentElement.reset();
+        } else {
+          alert("List name must be longer than 3 characters");
+        }
       });
     }
 

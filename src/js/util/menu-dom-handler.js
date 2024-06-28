@@ -34,7 +34,7 @@ MenuController.prototype = {
 
   updateCategories: function () {
     const uniqueCategoryList = taskController.getUniqueCategories();
-
+    this.listContainer.innerHTML = "";
     uniqueCategoryList.forEach((category) =>
       this.addCategoryToList(category, category === "General" ? false : true)
     );

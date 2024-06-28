@@ -1,5 +1,6 @@
 import { Task } from "../classes/task";
 import { contentController } from "../util/content-dom-handler";
+import { menuController } from "../util/menu-dom-handler";
 
 // Define the TaskController class as a constructor function
 function TaskController() {
@@ -14,6 +15,7 @@ TaskController.prototype = {
     contentController.createSectionOfCategory(task.category);
     const returnVal = this.tasks.push(task);
     contentController.renderContent();
+    menuController.updateDom();
 
     return returnVal;
   },
@@ -30,7 +32,11 @@ TaskController.prototype = {
 
   // Method to delete a task
   deleteTask: function (taskId) {
+    taskId = Number(taskId);
     this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    console.log(`deleted task ${taskId}`);
+    console.log(`list: ${this.tasks.filter((task) => task.id !== taskId)}`);
+    menuController.updateDom();
   },
 
   // Method to get all tasks
@@ -61,7 +67,6 @@ TaskController.prototype = {
 
   getTaskOfID: function (taskID) {
     const taskID_number = taskID.substring(4, taskID.length);
-    console.log(this.tasks.filter((task) => task.id == taskID_number));
     return this.tasks.filter((task) => task.id == taskID_number)[0];
   },
 };

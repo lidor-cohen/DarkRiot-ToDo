@@ -1,4 +1,5 @@
 import openImage from "../../assets/open-90.png";
+import deleteImage from "../../assets/delete-90.png";
 import { taskController } from "../classes/task-controller";
 import { menuController } from "./menu-dom-handler";
 import { format } from "date-fns";
@@ -32,7 +33,10 @@ ContentController.prototype = {
             <h4>${task.name}</h4>
           </div>
     
-          <img src="${openImage}" alt="open task icon" />
+          <div>
+          <img class="delete-task-btn" src="${deleteImage}" alt="delete task icon" />
+          <img class="open-task-btn" src="${openImage}" alt="open task icon" />
+          </div>
         </div>
       `;
 
@@ -80,7 +84,9 @@ ContentController.prototype = {
 
   bindEvents: function () {
     (function openTaskButton() {
-      const buttons = document.querySelectorAll(".task-item img");
+      const buttons = document.querySelectorAll(
+        ".task-item div .open-task-btn"
+      );
       const dialogModal = document.querySelector("#task-show-wrapper");
       const dialogContent = dialogModal.querySelector(
         "#task-show-wrapper .dialog-inner"
@@ -88,25 +94,44 @@ ContentController.prototype = {
 
       buttons.forEach((button) => {
         button.addEventListener("click", () => {
-          const task = taskController.getTaskOfID(button.parentElement.id);
+          const task = taskController.getTaskOfID(
+            button.parentElement.parentElement.id
+          );
 
           const taskInfo = `
-            <div>
               <h1>Task Name: ${task.name}</h1>
-              <h3>Task Description: ${
-                task.description === "" ? "No Description" : task.description
-              } </h3>
-              <h3>Task Category: ${task.category} </h3>
-              <h3>Task Priority: ${task.priority} </h3>
-              <h3>Task Due Date: ${format(
-                task.dueDate,
-                "dd-MM-yyy hh:mm"
-              )} </h3>
-            </div>
+              <hr />
+              <div class="task-info">
+                <h3>Task Description: ${
+                  task.description === "" ? "No Description" : task.description
+                } </h3>
+                <h3>Task Category: ${task.category} </h3>
+                <h3>Task Priority: ${task.priority} </h3>
+                <h3>Task Due Date: ${format(
+                  task.dueDate,
+                  "dd-MM-yyy hh:mm"
+                )} </h3>
+              </div>
           `;
 
           dialogContent.innerHTML = taskInfo;
           dialogModal.showModal();
+        });
+      });
+    })();
+
+    (function deleteTaskButton() {
+      const buttons = document.querySelectorAll(
+        ".task-item div .delete-task-btn"
+      );
+
+      buttons[0] != null ? buttons[0].remove() : null;
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const parentTask = button.parentElement.parentElement;
+          const parentTaskID = parentTask.id.substring(4);
+          taskController.deleteTask(parentTaskID);
+          parentTask.remove();
         });
       });
     })();

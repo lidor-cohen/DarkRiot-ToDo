@@ -4,7 +4,6 @@ import { taskController } from "../classes/task-controller";
 function TaskWindowController() {
   this.addTaskButton = document.getElementById("add-task-wrapper");
   this.taskDialog = document.getElementById("task-dialog-wrapper");
-  this.categorySelect = document.getElementById("dialog-input-category");
   this.priorityLabel = document.getElementById("priority-label");
   this.prioritySlider = document.getElementById("dialog-input-priority");
   this.submitButton = document.getElementById("submit-task-button");
@@ -13,7 +12,6 @@ function TaskWindowController() {
 
 TaskWindowController.prototype = {
   bindEvents: function () {
-    console.log(taskController.tasks);
     // Priority Range
     this.prioritySlider.addEventListener(
       "input",
@@ -22,6 +20,7 @@ TaskWindowController.prototype = {
     );
 
     // Category Selector
+    this.categorySelect = document.getElementById("dialog-input-category");
     this.categorySelect.innerHTML = "";
     taskController.getUniqueCategories().forEach((category) => {
       const optionItem = `

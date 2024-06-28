@@ -53,7 +53,6 @@ MenuController.prototype = {
       );
 
       yourListsButton.addEventListener("click", (e) => {
-        e.stopImmediatePropagation();
         contentController.changeView("list-view-section");
       });
 

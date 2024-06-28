@@ -1,4 +1,5 @@
 import "./js/css-imports";
+import { animationController } from "./js/animations/menu-animations";
 import { Task } from "./js/classes/task";
 import { taskController } from "./js/classes/task-controller";
 import { menuController } from "./js/util/menu-dom-handler";
@@ -13,6 +14,7 @@ function init() {
 
   menuController.updateDom();
   taskWindowController.bindEvents();
+  animationController.applyMenuAnimations();
 }
 
 init();

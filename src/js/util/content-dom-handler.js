@@ -23,6 +23,9 @@ ContentController.prototype = {
         container.id.indexOf("-section")
       );
 
+      const taskCountHeader = document.querySelector("#total-task-header");
+      taskCountHeader.textContent = taskController.getAllTasks().length;
+
       taskViewContainer.innerHTML = "";
 
       taskController.getAllTasks(categorySelected).forEach((task) => {

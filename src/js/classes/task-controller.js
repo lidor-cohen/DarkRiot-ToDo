@@ -34,8 +34,7 @@ TaskController.prototype = {
   deleteTask: function (taskId) {
     taskId = Number(taskId);
     this.tasks = this.tasks.filter((task) => task.id !== taskId);
-    console.log(`deleted task ${taskId}`);
-    console.log(`list: ${this.tasks.filter((task) => task.id !== taskId)}`);
+
     menuController.updateDom();
   },
 

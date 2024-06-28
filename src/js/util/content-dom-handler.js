@@ -29,7 +29,7 @@ ContentController.prototype = {
         const taskItem = `
         <div id="task${task.id}" class="task-item">
           <div class="task-checkbox-container">
-            <input type="checkbox" />
+            <input class="task-checkbox" type="checkbox" />
             <h4>${task.name}</h4>
           </div>
     
@@ -61,7 +61,6 @@ ContentController.prototype = {
   },
 
   createSectionOfCategory: function (categoryName) {
-    console.log(categoryName);
     const sectionHTML = `
       <div class="content-section" id="${this.getCategoryId(categoryName)}">
         <h1>${categoryName}</h1>
@@ -133,6 +132,22 @@ ContentController.prototype = {
           const parentTaskID = parentTask.id.substring(4);
           taskController.deleteTask(parentTaskID);
           parentTask.remove();
+        });
+      });
+    })();
+
+    (function finishedTaskButton() {
+      const checkboxes = document.querySelectorAll(".task-checkbox");
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const taskElement = checkbox.parentElement.parentElement;
+          const task = taskController.getTaskOfID(taskElement.id);
+          task.completed = !task.completed;
+
+          task.completed
+            ? (taskElement.style.textDecoration = "line-through")
+            : (taskElement.style.textDecoration = "none");
         });
       });
     })();
